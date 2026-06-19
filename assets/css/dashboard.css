@@ -1,0 +1,3 @@
+/* Dashboard-specific refinements */
+.dashboard-summary { align-items: stretch; }
+.recognition-label { font-size: 18px; font-weight: 900; color: var(--primary-dark); }

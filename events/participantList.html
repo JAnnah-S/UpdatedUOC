@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Participant List | FK Club Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/event.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body class="app-shell" data-page="participantList" data-role="committee" data-nav="participants">
+  <aside id="sidebar" class="sidebar"></aside>
+
+  <main class="main">
+    <div id="topbar" class="topbar"></div>
+
+    <header class="page-header">
+      <div class="header-row">
+        <div>
+          <h1>Event Participant List</h1>
+          <p>Manage confirmed participants and waiting list for your own club events only.</p>
+        </div>
+        <a class="btn btn-light" href="eventList.html">Back to Events</a>
+      </div>
+    </header>
+
+    <section class="card" style="margin-bottom:22px">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Choose Event</label>
+          <select id="participantEventSelect"></select>
+        </div>
+
+        <div class="form-group">
+          <label>Search Participant</label>
+          <input id="participantSearch" placeholder="Search by name or student ID...">
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-3" style="margin-bottom:22px">
+      <div class="card stat-card">
+        <div>
+          <div class="stat-label">Registered Participants</div>
+          <div class="stat-value" id="confirmedCount">0 / 0</div>
+        </div>
+        <div class="stat-icon">👥</div>
+      </div>
+
+      <div class="card stat-card">
+        <div>
+          <div class="stat-label">Waiting List</div>
+          <div class="stat-value" id="waitingCount">0</div>
+        </div>
+        <div class="stat-icon">⏳</div>
+      </div>
+
+      <div class="card stat-card">
+        <div>
+          <div class="stat-label">Fill Rate</div>
+          <div class="stat-value" id="fillRate">0%</div>
+        </div>
+        <div class="stat-icon">📊</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="header-row" style="align-items:center">
+        <div>
+          <h2>Confirmed Participants</h2>
+          <p class="muted-text" id="eventMetaText">Only confirmed students are counted for capacity and attendance.</p>
+        </div>
+        <button class="btn btn-secondary" id="exportParticipantsBtn" type="button">Export CSV</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Student Name</th>
+              <th>Student ID</th>
+              <th>Registration Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="confirmedParticipantsTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:22px;background:#fff7ed;border-color:#fed7aa">
+      <div class="header-row" style="align-items:center">
+        <div>
+          <h2>Waiting List</h2>
+          <p class="muted-text">Promote students when confirmed participant slots become available.</p>
+        </div>
+        <span class="badge late" id="waitingLabel">0 student(s)</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Student Name</th>
+              <th>Student ID</th>
+              <th>Queued At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="waitingParticipantsTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="../api/data.js.php"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/sidebar.js"></script>
+  <script src="../assets/js/participantList.js"></script>
+</body>
+</html>

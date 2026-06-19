@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance QR | FK Club Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/event.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body class="app-shell" data-page="attendanceQR" data-role="committee" data-nav="attendance">
+  <aside id="sidebar" class="sidebar"></aside>
+  <main class="main">
+    <div id="topbar" class="topbar"></div>
+    <header class="page-header"><h1>Attendance QR + Geolocation</h1><p>Students scan this code during the event. Committee can use geolocation as check-in proof.</p></header>
+    <section class="form-group" style="margin-bottom:18px;max-width:760px;">
+      <label for="qrEventSelect">Select Event</label>
+      <select id="qrEventSelect"></select>
+    </section>
+    <section class="card qr-panel" style="max-width:760px;text-align:center">
+      <h2 id="qrTitle">Event</h2>
+      <p id="qrMeta" class="muted-text">Event details</p>
+      <div id="fakeQR" class="qr-box"></div>
+      <p><strong id="qrCodeText">FKHUB-EVENT</strong></p>
+      <div class="geo-card"><strong>Geolocation Stamp:</strong><br><span id="geoOutput">Click button to capture location.</span></div>
+      <div class="actions" style="justify-content:center;margin-top:18px"><button class="btn btn-light" id="qrGeoBtn" type="button">Capture Geolocation</button><a class="btn btn-primary" id="recordLink" href="attendanceRecord.html">Record Attendance</a></div>
+    </section>
+  </main>
+  <script src="../api/data.js.php"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/sidebar.js"></script>
+  <script src="../assets/js/attendance.js"></script>
+</body>
+</html>

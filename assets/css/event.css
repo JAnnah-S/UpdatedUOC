@@ -1,0 +1,2 @@
+.event-date { width: 64px; height: 64px; border-radius: 16px; background: var(--primary-soft); display: grid; place-items: center; color: var(--primary-dark); font-weight: 900; text-align:center; }
+.event-date small { display:block; font-size:11px; text-transform:uppercase; }

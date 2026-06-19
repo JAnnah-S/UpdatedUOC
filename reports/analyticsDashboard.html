@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Dashboard | FK Club Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body class="app-shell" data-page="analyticsDashboard" data-role="admin,committee" data-nav="reports">
+  <aside id="sidebar" class="sidebar"></aside>
+  <main class="main">
+    <div id="topbar" class="topbar"></div>
+    <header class="page-header">
+      <div class="header-row">
+        <div><h1>Analytics Dashboard</h1><p>Graphical presentation for events, attendance, points, top students and top clubs.</p></div>
+        <div class="actions"><a class="btn btn-secondary" href="participationReport.html">Participation</a><a class="btn btn-secondary" href="attendanceReport.html">Attendance</a><a class="btn btn-secondary" href="ranking.html">Top 5 Ranking</a></div>
+      </div>
+    </header>
+
+    <section class="card" id="reportFiltersCard">
+      <h2>Report Filters</h2>
+      <div class="filter-row"><select id="reportClubFilter"><option value="">All Clubs</option></select><select id="reportSemesterFilter"><option value="">All Semesters</option></select><select id="reportTypeFilter"><option value="">All Event Types</option></select><button class="btn btn-light" id="resetReportFilters" type="button">Reset Filter</button></div>
+    </section>
+
+    <section class="grid grid-3" style="margin-top:26px">
+      <div class="card chart-card"><h2>Events by Club</h2><canvas id="eventsByClubChart" class="chart"></canvas></div>
+      <div class="card chart-card"><h2>Attendance Rate by Event</h2><canvas id="monthlyTrendChart" class="chart"></canvas></div>
+      <div class="card chart-card"><h2>Recognition / Points Distribution</h2><canvas id="pointsChart" class="chart"></canvas></div>
+    </section>
+
+    <section class="grid grid-2" style="margin-top:26px">
+      <div class="card"><h2>Best 5 Students</h2><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Student</th><th>Points</th><th>Recognition</th></tr></thead><tbody id="reportTopStudents"></tbody></table></div></div>
+      <div class="card"><h2>Best 5 Clubs</h2><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Club</th><th>Events</th><th>Participants</th><th>Rate</th></tr></thead><tbody id="reportTopClubs"></tbody></table></div></div>
+    </section>
+  </main>
+  <script src="../api/data.js.php"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/sidebar.js"></script>
+  <script src="../assets/js/chart.js"></script>
+  <script src="reportController.js"></script>
+</body>
+</html>

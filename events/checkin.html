@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Check In</title></head>
+<body style="font-family:sans-serif;text-align:center;padding:40px;">
+  <h2>Event Check-In</h2>
+  <p id="msg">Recording your attendance...</p>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    fetch('../api/qr_checkin.php', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({token})
+    }).then(r=>r.json()).then(d=>{
+      document.getElementById('msg').textContent = d.message;
+    });
+  </script>
+</body>
+</html>

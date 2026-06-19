@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Registrations | FK Club Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/event.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body class="app-shell" data-page="myRegistrations" data-role="student" data-nav="my-registrations">
+  <aside id="sidebar" class="sidebar"></aside>
+
+  <main class="main">
+    <div id="topbar" class="topbar"></div>
+
+    <header class="page-header">
+      <h1>My Event Registrations</h1>
+      <p>View your confirmed registrations, waiting list status and cancelled events.</p>
+    </header>
+
+    <section class="card">
+      <h2>Registration History</h2>
+
+      <div class="tab-row" style="margin-bottom:18px">
+        <button class="btn btn-primary reg-filter" data-filter="All">All</button>
+        <button class="btn btn-light reg-filter" data-filter="Confirmed">Confirmed</button>
+        <button class="btn btn-light reg-filter" data-filter="Waiting">Waiting</button>
+        <button class="btn btn-light reg-filter" data-filter="Cancelled">Cancelled</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Event Name</th>
+              <th>Club</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="myRegistrationTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="../api/data.js.php"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/sidebar.js"></script>
+  <script src="../assets/js/myRegistrations.js"></script>
+</body>
+</html>

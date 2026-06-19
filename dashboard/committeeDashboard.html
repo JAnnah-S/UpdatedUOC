@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Committee Dashboard | FK Club Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body class="app-shell" data-page="committeeDashboard" data-role="committee,admin" data-nav="dashboard">
+  <aside id="sidebar" class="sidebar"></aside>
+  <main class="main">
+    <div id="topbar" class="topbar"></div>
+    <header class="page-header">
+      <div class="header-row">
+        <div><h1>Committee Dashboard</h1><p id="committeeClubName">Club engagement monitoring</p></div>
+        <div class="actions"><a class="btn btn-primary" href="../events/createEvent.html">+ Create Event</a><a class="btn btn-secondary" href="../events/attendanceRecord.html">Attendance / QR</a></div>
+      </div>
+    </header>
+
+    <section class="grid grid-4">
+      <div class="card stat-card"><div><div class="stat-label">Club Events</div><div class="stat-value" id="committeeEvents">0</div></div><div class="stat-icon">▦</div></div>
+      <div class="card stat-card"><div><div class="stat-label">Registrations</div><div class="stat-value" id="committeeRegistrations">0</div></div><div class="stat-icon">♙</div></div>
+      <div class="card stat-card"><div><div class="stat-label">Attendance</div><div class="stat-value" id="committeeAttendance">0</div></div><div class="stat-icon">✓</div></div>
+      <div class="card stat-card"><div><div class="stat-label">Attendance Rate</div><div class="stat-value" id="committeeRate">0%</div></div><div class="stat-icon">↗</div></div>
+    </section>
+
+    <section class="grid grid-2" style="margin-top:26px">
+      <div class="card chart-card"><h2>Participation by Event</h2><canvas id="committeeEventsChart" class="chart"></canvas></div>
+      <div class="card chart-card"><h2>Recognition Level in My Club</h2><canvas id="committeeRecognitionChart" class="chart"></canvas></div>
+    </section>
+
+    <section class="grid grid-2" style="margin-top:26px">
+      <div class="card">
+        <h2>My Club Events</h2>
+        <div class="table-wrap"><table><thead><tr><th>Event</th><th>Date</th><th>Type</th><th>Participants</th><th>Rate</th><th>QR</th></tr></thead><tbody id="committeeEventTable"></tbody></table></div>
+      </div>
+      <div class="card">
+        <h2>Top 5 Engagement in My Club</h2>
+        <div class="table-wrap"><table><thead><tr><th>Rank</th><th>Student</th><th>Points</th><th>Recognition</th></tr></thead><tbody id="committeeTopStudents"></tbody></table></div>
+      </div>
+    </section>
+  </main>
+  <script src="../api/data.js.php"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/sidebar.js"></script>
+  <script src="../assets/js/chart.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | FK Club Hub</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <h1>FK Club Hub</h1>
+    <p class="subtitle">Faculty of Computing, UMPSA Pekan Campus</p>
+    <form id="loginForm">
+      <div class="auth-field"><label for="loginId">Student / Staff ID</label><input id="loginId" type="text" placeholder="Example: CB23001 / ADMIN001" required></div>
+      <div class="auth-field"><label for="password">Password</label><div class="password-wrap"><input id="password" type="password" placeholder="Enter your password" required><button id="togglePassword" type="button">◎</button></div></div>
+      <div class="auth-row"><label><input type="checkbox"> Remember me</label><a href="forgotPassword.html">Forgot Password?</a></div>
+      <button class="auth-btn" type="submit">↪ Sign In</button>
+    </form>
+    <p class="auth-note">Secure login with session authentication</p>
+    <div class="auth-links"><span>New account? Please contact administrator for registration.</span></div>
+    
+  </main>
+  <script src="api/data.js.php"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/login.js"></script>
+</body>
+</html>

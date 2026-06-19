@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Manage Clubs | FK Club Hub</title><link rel="stylesheet" href="../assets/css/style.css"><link rel="stylesheet" href="../assets/css/club.css"><link rel="stylesheet" href="../assets/css/responsive.css"></head>
+<body class="app-shell" data-page="manageClub" data-role="admin,committee" data-nav="manage-clubs"><aside id="sidebar" class="sidebar"></aside><main class="main"><div id="topbar" class="topbar"></div><header class="page-header"><div class="header-row"><div><h1>Club Management</h1><p>Create, update, delete and view student club information.</p></div><a class="btn btn-secondary" href="committeeManagement.html" data-admin-only>Committee Roles</a></div></header><section class="grid grid-2"><div class="card"><h2 id="clubFormTitle">Create New Club</h2><form id="clubForm" class="form"><input type="hidden" id="clubId"><div class="form-group"><label>Club Name</label><input id="clubName" required></div><div class="form-grid"><div class="form-group"><label>Advisor Name</label><input id="advisor" required></div><div class="form-group"><label>Status</label><select id="status"><option>Active</option><option>Inactive</option></select></div></div><div class="form-group"><label>Description</label><textarea id="description" required></textarea></div><div class="actions"><button class="btn btn-primary" type="submit">Save Club</button><button class="btn btn-light" type="button" id="resetClubForm">Clear</button></div></form></div><div class="card"><h2>Club Records</h2><div class="table-wrap"><table><thead><tr><th>Club</th><th>Advisor</th><th>Members</th><th>Status</th><th>Action</th></tr></thead><tbody id="manageClubTable"></tbody></table></div></div></section></main><script src="../api/data.js.php"></script>
+  <script src="../assets/js/app.js"></script><script src="../assets/js/sidebar.js"></script><script src="clubController.js"></script></body></html>
+<form id="clubForm" class="form">
+    <input type="hidden" id="clubId">
+
+    <div class="form-grid">
+        <div class="form-group">
+            <label>Club Name</label>
+            <input id="clubName" required>
+        </div>
+
+        <div class="form-group">
+            <label>Club Code</label>
+            <input id="clubCode" placeholder="Example: ROB">
+        </div>
+    </div>
+
+    <div class="form-grid">
+        <div class="form-group">
+            <label>Advisor Name</label>
+            <input id="advisor" required>
+        </div>
+
+        <div class="form-group">
+            <label>Advisor Email</label>
+            <input id="advisorEmail" type="email" placeholder="advisor@umpsa.edu.my">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Status</label>
+        <select id="status">
+            <option>Active</option>
+            <option>Inactive</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <textarea id="description" required></textarea>
+    </div>
+
+    <div class="actions">
+        <button class="btn btn-primary" type="submit">Save Club</button>
+        <button class="btn btn-light" type="button" id="resetClubForm">Clear</button>
+    </div>
+</form>

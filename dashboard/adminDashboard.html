@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | FK Club Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body class="app-shell" data-page="adminDashboard" data-role="admin" data-nav="dashboard">
+  <aside id="sidebar" class="sidebar"></aside>
+  <main class="main">
+    <div id="topbar" class="topbar"></div>
+    <header class="page-header">
+      <div class="header-row">
+        <div><h1>Welcome back, <span data-current-name>System Administrator</span></h1><p>Administrator analytics, recognition status and user registration control.</p></div>
+        <div class="actions"><a class="btn btn-primary" href="../users/registerUser.html">+ Register New User</a><a class="btn btn-secondary" href="../reports/analyticsDashboard.html">Full Reports</a></div>
+      </div>
+    </header>
+
+    <section class="card admin-filter-card">
+      <div class="header-row"><div><h2>Admin Filters</h2><p class="muted-text">Filter dashboard by club, semester and event type to identify top participants and committees.</p></div></div>
+      <div class="filter-row">
+        <select id="adminClubFilter"><option value="">All Clubs</option></select>
+        <select id="adminSemesterFilter"><option value="">All Semesters</option></select>
+        <select id="adminTypeFilter"><option value="">All Event Types</option></select>
+        <button class="btn btn-light" id="resetAdminFilters" type="button">Reset Filter</button>
+      </div>
+    </section>
+
+    <section class="grid grid-4 dashboard-summary" style="margin-top:26px">
+      <div class="card stat-card"><div><div class="stat-label">Total Students</div><div class="stat-value" id="totalStudents">0</div></div><div class="stat-icon">♙</div></div>
+      <div class="card stat-card"><div><div class="stat-label">Total Events</div><div class="stat-value" id="totalEvents">0</div></div><div class="stat-icon">▦</div></div>
+      <div class="card stat-card"><div><div class="stat-label">Participation</div><div class="stat-value" id="totalParticipation">0</div></div><div class="stat-icon">☑</div></div>
+      <div class="card stat-card"><div><div class="stat-label">Attendance Rate</div><div class="stat-value" id="attendanceRate">0%</div></div><div class="stat-icon">↗</div></div>
+    </section>
+
+    <section class="grid grid-2" style="margin-top:26px">
+      <div class="card chart-card"><h2>Total Events Conducted by Club</h2><canvas id="clubParticipationChart" class="chart"></canvas></div>
+      <div class="card chart-card"><h2>Attendance Rate by Event</h2><canvas id="eventAttendanceChart" class="chart"></canvas></div>
+    </section>
+
+    <section class="grid grid-2" style="margin-top:26px">
+      <div class="card chart-card"><h2>Total Student Participation by Club</h2><canvas id="clubAttendanceChart" class="chart"></canvas></div>
+      <div class="card chart-card"><h2>Recognition Levels</h2><canvas id="recognitionChart" class="chart"></canvas></div>
+    </section>
+
+    <section class="grid grid-2" style="margin-top:26px">
+      <div class="card"><h2>Top 5 Most Active Students</h2><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Student</th><th>Points</th><th>Status</th></tr></thead><tbody id="adminTopStudents"></tbody></table></div></div>
+      <div class="card"><h2>Top 5 Most Active Clubs</h2><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Club</th><th>Events</th><th>Participants</th><th>Rate</th></tr></thead><tbody id="adminTopClubs"></tbody></table></div></div>
+    </section>
+
+    <section class="card" style="margin-top:26px">
+      <h2>Points by Student per Event and Overall Semester</h2>
+      <div class="table-wrap"><table><thead><tr><th>Student</th><th>Event</th><th>Club</th><th>Semester</th><th>Event Points</th><th>Overall Points</th><th>Recognition</th></tr></thead><tbody id="adminPointsTable"></tbody></table></div>
+    </section>
+
+    <section class="card" style="margin-top:26px">
+      <div class="header-row"><h2>Admin-only User Registration</h2><a class="btn btn-secondary" href="../users/manageUsers.html">Manage Users</a></div>
+      <p class="muted-text">First-time account creation has been moved here. Students cannot register themselves from the login page.</p>
+      <div class="table-wrap"><table><thead><tr><th>Name</th><th>ID</th><th>Role</th><th>Registered</th></tr></thead><tbody id="recentRegistrations"></tbody></table></div>
+    </section>
+  </main>
+  <script src="../api/data.js.php"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/sidebar.js"></script>
+  <script src="../assets/js/chart.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>
