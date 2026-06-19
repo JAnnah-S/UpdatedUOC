@@ -15,9 +15,11 @@ function table_exists_for_delete(string $table): bool
 }
 
 try {
-    require_role(['admin']);
+    // Sila benarkan admin dan committee (jika perlu) untuk memadam
+    require_role(['admin', 'committee']);
 
     $data = get_json_input();
+    // Membaca 'id' daripada clubController.js yang dihantar sebagai { id }
     $clubId = trim((string)($data['id'] ?? $data['clubId'] ?? ''));
 
     if ($clubId === '') {
@@ -93,6 +95,13 @@ try {
     if (table_exists_for_delete('event')) {
         db()->prepare('
             DELETE FROM event
+            WHERE BINARY club_id = BINARY ?
+        ')->execute([$clubId]);
+    }
+
+    if (table_exists_for_delete('memberships')) {
+        db()->prepare('
+            DELETE FROM memberships
             WHERE BINARY club_id = BINARY ?
         ')->execute([$clubId]);
     }

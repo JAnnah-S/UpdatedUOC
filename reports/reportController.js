@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     FKCharts.drawBar('monthlyTrendChart', events.length ? events.slice(0, 7).map(e => e.title.split(' ').slice(0,2).join(' ')) : ['No event'], events.length ? events.slice(0, 7).map(e => App.attendanceRateForEvent(e.id)) : [0]);
 
     const pointBuckets = ['Warning', 'Certificate', 'Active', 'Outstanding'];
-    const counts = [0,0,0,0];
+    const counts = [0, 0, 0, 0];
     db.users.filter(u => u.role === 'student').forEach(u => {
       const p = App.pointsForUser(u.id, filters);
       if (p < 20) counts[0]++; else if (p < 50) counts[1]++; else if (p < 80) counts[2]++; else counts[3]++;
@@ -82,7 +82,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderAttendanceReport() {
     const target = document.getElementById('attendanceReportTable'); if (!target) return;
-    const events = baseEvents();
+    
+    const searchVal = document.getElementById('attendanceSearch')?.value.toLowerCase() || '';
+    const committeeVal = document.getElementById('attendanceCommitteeFilter')?.value || '';
+
+    let events = baseEvents();
+
+    events = events.filter(e => {
+      const matchesSearch = e.title.toLowerCase().includes(searchVal);
+      const eventComm = e.committee || e.eventCommittee || '';
+      const matchesCommittee = !committeeVal || eventComm === committeeVal;
+      return matchesSearch && matchesCommittee;
+    });
+
     target.innerHTML = events.map(e => {
       const records = db.attendance.filter(a=>a.eventId===e.id);
       const registered = App.registrationsForEvent(e.id).length;
@@ -90,7 +102,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const rate=registered ? Math.round((present/registered)*100) : 0;
       const points=records.reduce((s,a)=>s+Number(a.points||0),0);
       return `<tr><td>${App.escapeHTML(e.title)}</td><td>${registered}</td><td>${present}</td><td>${records.filter(a=>a.status==='Late').length}</td><td>${records.filter(a=>a.status==='Absent').length}</td><td>${rate}%</td><td><strong>${points}</strong></td></tr>`;
-    }).join('') || '<tr><td colspan="7">No attendance report.</td></tr>';
+    }).join('') || '<tr><td colspan="7">No attendance report found.</td></tr>';
+  }
+
+  function setupAttendanceReportListeners() {
+    const searchInput = document.getElementById('attendanceSearch');
+    const committeeSelect = document.getElementById('attendanceCommitteeFilter');
+    
+    if (searchInput) {
+      searchInput.addEventListener('input', renderAttendanceReport);
+    }
+    if (committeeSelect) {
+      committeeSelect.addEventListener('change', renderAttendanceReport);
+    }
   }
 
   function renderRanking() {
@@ -103,6 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (page === 'analyticsDashboard') { populateReportFilters(); initAnalytics(); }
   if (page === 'participationReport') renderParticipation();
-  if (page === 'attendanceReport') renderAttendanceReport();
+  
+  if (page === 'attendanceReport') {
+    renderAttendanceReport();
+    setupAttendanceReportListeners();
+  }
   if (page === 'ranking') renderRanking();
 });

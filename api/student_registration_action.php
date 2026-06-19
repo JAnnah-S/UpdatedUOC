@@ -4,7 +4,7 @@ require_once __DIR__ . '/config.php';
 function recalc_event_count_after_student_action(int $eventId): void
 {
     $stmt = db()->prepare('
-        UPDATE event 
+        UPDATE events 
         SET current_count = (
             SELECT COUNT(*) 
             FROM registrations 
@@ -13,6 +13,36 @@ function recalc_event_count_after_student_action(int $eventId): void
         WHERE event_id = ?
     ');
     $stmt->execute([$eventId, $eventId]);
+}
+
+// --- FUNGSI BAHARU: AUTOMATIK NAIKKAN PELAJAR DARI WAITING LIST ---
+function promote_next_waiting_student(int $eventId): void
+{
+    $pdo = db();
+    
+    // 1. Semak kapasiti maksimum dan jumlah confirmed terkini bagi acara tersebut
+    $event = fetch_one("SELECT capacity, (SELECT COUNT(*) FROM registrations WHERE event_id = ? AND status = 'Confirmed') as current_confirmed FROM events WHERE event_id = ?", [$eventId, $eventId]);
+    
+    if ($event && $event['current_confirmed'] < $event['capacity']) {
+        // 2. Cari pelajar terawal yang berstatus 'Waiting' dalam jadual registrations
+        $nextInQueue = fetch_one("
+            SELECT registration_id 
+            FROM registrations 
+            WHERE event_id = ? AND status = 'Waiting' 
+            ORDER BY registration_id ASC 
+            LIMIT 1
+        ", [$eventId]);
+        
+        if ($nextInQueue) {
+            // 3. Kemas kini status pelajar tersebut kepada 'Confirmed'
+            $stmt = $pdo->prepare("UPDATE registrations SET status = 'Confirmed' WHERE registration_id = ?");
+            $stmt->execute([$nextInQueue['registration_id']]);
+            
+            // 4. Jika sistem anda menggunakan jadual berasingan 'waiting_list', kemas kini atau padam rekod di sana juga
+            $stmt = $pdo->prepare("DELETE FROM waiting_list WHERE event_id = ? AND status = 'Waiting' ORDER BY id ASC LIMIT 1");
+            @$stmt->execute([$eventId]); // Tanda @ untuk mengelakkan ralat jika jadual waiting_list belum dibuat
+        }
+    }
 }
 
 try {
@@ -74,20 +104,24 @@ try {
         ], 400);
     }
 
-   $stmt = db()->prepare('
+    $stmt = db()->prepare('
         UPDATE registrations 
         SET status = "Cancelled"
         WHERE registration_id = ?
     ');
     $stmt->execute([$registrationId]);
 
-    // If leaving the waiting queue, DELETE from waiting_list table
     if ($action === 'leave_queue') {
         $stmt = db()->prepare('
             DELETE FROM waiting_list 
             WHERE event_id = ? AND student_id = ? AND status = "Waiting"
         ');
         $stmt->execute([(int)$reg['event_id'], $reg['student_id']]);
+    }
+
+    // Panggil fungsi auto-promote jika pendaftaran Confirmed yang dibatalkan
+    if ($action === 'cancel') {
+        promote_next_waiting_student((int)$reg['event_id']);
     }
 
     recalc_event_count_after_student_action((int)$reg['event_id']);
