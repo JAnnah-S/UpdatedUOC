@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2026 at 11:23 PM
+-- Generation Time: Jun 19, 2026 at 11:46 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -168,6 +168,8 @@ CREATE TABLE `event` (
   `event_date` date NOT NULL,
   `event_time` time NOT NULL,
   `venue` varchar(200) NOT NULL,
+  `latitude` decimal(10,8) DEFAULT NULL,
+  `longitude` decimal(11,8) DEFAULT NULL,
   `max_participants` int(6) NOT NULL,
   `current_count` int(6) NOT NULL DEFAULT 0,
   `status` enum('active','cancelled','completed') NOT NULL DEFAULT 'active',
@@ -181,18 +183,18 @@ CREATE TABLE `event` (
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`event_id`, `event_title`, `event_description`, `event_date`, `event_time`, `venue`, `max_participants`, `current_count`, `status`, `club_id`, `committee_id`, `semester`, `event_type`) VALUES
-(1, 'Web Dev Hackathon 2025', 'Annual hackathon event', '2025-11-15', '09:00:00', 'DK5, FK Building', 50, 30, 'active', 'CLB001', 1, NULL, NULL),
-(2, 'Cybersecurity Awareness Talk', 'Talk on cybersecurity trends', '2025-11-22', '14:00:00', 'Auditorium A, UMPSA', 80, 40, 'active', 'CLB002', 1, NULL, NULL),
-(3, 'UI/UX Design Workshop', 'Hands-on UX design session', '2025-12-05', '10:00:00', 'Lab 3, FK Building', 30, 20, 'active', 'CLB001', 1, NULL, NULL),
-(4, 'Annual Sports & Coding Day', 'Sports and coding combined event', '2025-12-10', '08:00:00', 'Sports Complex, UMPSA', 100, 50, 'active', 'CLB004', 1, NULL, NULL),
-(5, 'Network Security CTF', 'Capture The Flag challenge', '2026-01-20', '09:30:00', 'DK2, FK Building', 40, 40, 'completed', 'CLB002', 1, NULL, NULL),
-(6, 'AI Prompt Engineering Workshop', 'Introduction to Prompt Engineering', '2026-02-15', '09:00:00', 'Lab AI 1', 60, 45, 'active', 'CLB005', 1, NULL, NULL),
-(7, 'Mobile App Development Bootcamp', 'Flutter Development Training', '2026-02-22', '08:30:00', 'Lab Mobile', 50, 38, 'active', 'CLB006', 1, NULL, NULL),
-(8, 'Data Analytics Seminar', 'Data Science Career Talk', '2026-03-10', '10:00:00', 'Auditorium B', 120, 2, 'active', 'CLB007', 1, NULL, NULL),
-(9, 'Software Machine', 'Software Student Only', '2026-06-18', '12:00:00', 'DK1-123', 100, 0, 'active', 'CLB001', 1, '2025/2026-2', 'Workshop'),
-(10, 'Software', 'Software', '2026-06-27', '23:17:00', 'DK1-123', 111, 0, 'active', 'CLB001', 1, '2025/2026-2', 'Workshop'),
-(11, 'SAJA', 'SAJA', '2026-06-19', '00:30:00', 'DK1-123', 1, 1, 'active', 'CLB001', 1, '2025/2026-2', 'Workshop');
+INSERT INTO `event` (`event_id`, `event_title`, `event_description`, `event_date`, `event_time`, `venue`, `latitude`, `longitude`, `max_participants`, `current_count`, `status`, `club_id`, `committee_id`, `semester`, `event_type`) VALUES
+(1, 'Web Dev Hackathon 2025', 'Annual hackathon event', '2025-11-15', '09:00:00', 'DK5, FK Building', NULL, NULL, 50, 30, 'active', 'CLB001', 1, NULL, NULL),
+(2, 'Cybersecurity Awareness Talk', 'Talk on cybersecurity trends', '2025-11-22', '14:00:00', 'Auditorium A, UMPSA', NULL, NULL, 80, 40, 'active', 'CLB002', 1, NULL, NULL),
+(3, 'UI/UX Design Workshop', 'Hands-on UX design session', '2025-12-05', '10:00:00', 'Lab 3, FK Building', NULL, NULL, 30, 20, 'active', 'CLB001', 1, NULL, NULL),
+(4, 'Annual Sports & Coding Day', 'Sports and coding combined event', '2025-12-10', '08:00:00', 'Sports Complex, UMPSA', NULL, NULL, 100, 50, 'active', 'CLB004', 1, NULL, NULL),
+(5, 'Network Security CTF', 'Capture The Flag challenge', '2026-01-20', '09:30:00', 'DK2, FK Building', NULL, NULL, 40, 40, 'completed', 'CLB002', 1, NULL, NULL),
+(6, 'AI Prompt Engineering Workshop', 'Introduction to Prompt Engineering', '2026-02-15', '09:00:00', 'Lab AI 1', NULL, NULL, 60, 45, 'active', 'CLB005', 1, NULL, NULL),
+(7, 'Mobile App Development Bootcamp', 'Flutter Development Training', '2026-02-22', '08:30:00', 'Lab Mobile', NULL, NULL, 50, 38, 'active', 'CLB006', 1, NULL, NULL),
+(8, 'Data Analytics Seminar', 'Data Science Career Talk', '2026-03-10', '10:00:00', 'Auditorium B', NULL, NULL, 120, 2, 'active', 'CLB007', 1, NULL, NULL),
+(9, 'Software Machine', 'Software Student Only', '2026-06-18', '12:00:00', 'DK1-123', NULL, NULL, 100, 0, 'active', 'CLB001', 1, '2025/2026-2', 'Workshop'),
+(10, 'Software', 'Software', '2026-06-27', '23:17:00', 'DK1-123', NULL, NULL, 111, 0, 'active', 'CLB001', 1, '2025/2026-2', 'Workshop'),
+(11, 'SAJA', 'SAJA', '2026-06-19', '00:30:00', 'DK1-123', NULL, NULL, 1, 1, 'active', 'CLB001', 1, '2025/2026-2', 'Workshop');
 
 -- --------------------------------------------------------
 
