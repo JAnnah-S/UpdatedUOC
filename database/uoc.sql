@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 10, 2026 at 08:32 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Jun 19, 2026 at 11:23 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `uoc`
+-- Database: `UOC`
 --
 
 -- --------------------------------------------------------
@@ -232,12 +232,12 @@ CREATE TABLE `membership` (
 --
 
 INSERT INTO `membership` (`membership_id`, `student_id`, `club_id`, `student_card_path`, `status`, `application_date`, `expiry_date`, `approved_by`, `approved_at`, `remarks`) VALUES
+('MBR001', 'TK24029', 'CLB010', 'admin-created', 'Active', '2026-06-11', NULL, 'CB24068', '2026-06-11 01:44:58', 'Created by admin dashboard'),
 ('MEM001', 'CB24001', 'CLB001', 'uploads/matric_CB24001.pdf', 'Active', '2026-01-15', '2027-01-15', 'SF001', '2026-06-07 17:50:11', NULL),
 ('MEM002', 'CB24002', 'CLB002', 'uploads/matric_CB24002.pdf', 'Active', '2026-01-15', '2027-01-15', 'SF001', '2026-06-07 17:50:11', NULL),
 ('MEM003', 'CB24003', 'CLB001', 'uploads/matric_CB24003.pdf', 'Pending', '2026-06-01', '2027-06-01', NULL, NULL, 'Waiting for approval'),
 ('MEM004', 'CB24004', 'CLB003', 'uploads/matric_CB24004.pdf', 'Active', '2026-01-10', '2027-01-10', 'SF001', '2026-06-07 17:50:11', NULL),
-('MEM005', 'CB24005', 'CLB002', 'uploads/matric_CB24005.pdf', 'Active', '2026-01-10', '2027-01-10', 'SF001', '2026-06-07 17:50:11', NULL),
-('MBR001', 'TK24029', 'CLB010', 'admin-created', 'Active', '2026-06-11', NULL, 'CB24068', '2026-06-11 01:44:58', 'Created by admin dashboard');
+('MEM005', 'CB24005', 'CLB002', 'uploads/matric_CB24005.pdf', 'Active', '2026-01-10', '2027-01-10', 'SF001', '2026-06-07 17:50:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -289,10 +289,7 @@ INSERT INTO `registrations` (`registration_id`, `event_id`, `student_name`, `stu
 (27, 11, 'Siti Rahmah binti Othman', 'CB24003', 'Cancelled', '2026-06-10 16:33:29', '2026-06-10 16:33:29'),
 (28, 8, 'Khairul Anwar bin Hassan', 'CB24004', 'Cancelled', '2026-06-10 16:36:07', '2026-06-10 16:36:07'),
 (29, 11, 'Khairul Anwar bin Hassan', 'CB24004', 'Cancelled', '2026-06-10 17:10:47', '2026-06-10 17:10:47'),
-(30, 11, 'Khairul Anwar bin Hassan', 'CB24004', 'Cancelled', '2026-06-10 17:23:32', '2026-06-10 17:23:32'),
-(31, 11, 'Khairul Anwar bin Hassan', 'CB24004', 'Cancelled', '2026-06-10 17:27:29', '2026-06-10 17:27:29'),
-(32, 11, 'Zulaikha Nadia binti Mahmud', 'CB24005', 'Cancelled', '2026-06-10 17:37:35', '2026-06-10 17:37:35'),
-(33, 11, 'Zulaikha Nadia binti Mahmud', 'CB24005', 'Waiting', '2026-06-10 17:38:44', '2026-06-10 17:38:44');
+(32, 11, 'Zulaikha Nadia binti Mahmud', 'CB24005', 'Cancelled', '2026-06-10 17:37:35', '2026-06-10 17:37:35');
 
 -- --------------------------------------------------------
 
@@ -403,32 +400,16 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `full_name`, `email`, `phone`, `role`, `profile_photo`, `status`, `created_at`, `updated_at`) VALUES
-('SF001', 'admin01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Dr. Siti Aminah binti Ahmad', 'admin@umpsa.edu.my', NULL, 'admin', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
-('FK2008', 'committee01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Ahmad Firdaus bin Razak', 'firdaus@student.umpsa.edu.my', NULL, 'committee', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
-('FK2004', 'committee02', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Nurul Hazwani binti Ismail', 'hazwani@student.umpsa.edu.my', NULL, 'committee', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
+('CB24068', 'CB24068', '$2y$10$l8.VYU5AvYgE.YyMnIDzC.KcOdVpwSxunUObHNE1l613DwNF5Fz9m', 'MOHAMAD AKMAL', 'cb24068@adab.umpsa.edu.my', '010-000000', 'admin', NULL, 'active', '2026-06-10 22:58:48', '2026-06-10 22:58:48'),
+('CB24084', 'CB24084', '$2y$10$xNZQ87UkIKhFFzsidwPXsu1WTAg76AZr2nWBzEFBzGl8FVHPw.EBW', 'HASLIZA BINTI MAD SAID', 'cb24084@adab.umpsa.edu.my', '010-3393392', 'admin', NULL, 'active', '2026-06-10 23:01:36', '2026-06-10 23:01:36'),
 ('FK1002', 'student01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Nurul Aina binti Zainal', 'aina@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
 ('FK1035', 'student02', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Muhammad Haziq bin Zulkifli', 'haziq@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
 ('FK1036', 'student03', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Siti Rahmah binti Othman', 'rahmah@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
 ('FK1039', 'student04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Khairul Anwar bin Hassan', 'khairul@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
 ('FK1045', 'student05', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Zulaikha Nadia binti Mahmud', 'zulaikha@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
-('SF001', 'admin01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Dr. Siti Aminah binti Ahmad', 'admin@umpsa.edu.my', NULL, 'admin', NULL, 'active', '2026-06-07 17:43:35', '2026-06-07 17:43:35'),
-('FK2008', 'committee01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Ahmad Firdaus bin Razak', 'firdaus@student.umpsa.edu.my', NULL, 'committee', NULL, 'active', '2026-06-07 17:43:35', '2026-06-07 17:43:35'),
-('FK2004', 'committee02', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Nurul Hazwani binti Ismail', 'hazwani@student.umpsa.edu.my', NULL, 'committee', NULL, 'active', '2026-06-07 17:43:35', '2026-06-07 17:43:35'),
-('FK1002', 'student01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Nurul Aina binti Zainal', 'aina@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 17:43:35', '2026-06-07 17:43:35'),
-('FK1035', 'student02', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Muhammad Haziq bin Zulkifli', 'haziq@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 17:43:35', '2026-06-07 17:43:35'),
-('FK1036', 'student03', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Siti Rahmah binti Othman', 'rahmah@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 17:43:35', '2026-06-07 17:43:35'),
-('FK1039', 'student04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Khairul Anwar bin Hassan', 'khairul@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 17:43:35', '2026-06-07 17:43:35'),
-('FK1045', 'student05', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Zulaikha Nadia binti Mahmud', 'zulaikha@student.umpsa.edu.my', NULL, 'student', NULL, 'active', '2026-06-07 17:43:35', '2026-06-07 17:43:35'),
-('SF001', 'admin01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Dr. Siti Aminah binti Ahmad', 'admin@umpsa.edu.my', '0123456789', 'admin', NULL, 'active', '2026-06-07 17:50:11', '2026-06-07 17:50:11'),
-('FK2008', 'committee01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Ahmad Firdaus bin Razak', 'firdaus@student.umpsa.edu.my', '0123456780', 'committee', NULL, 'active', '2026-06-07 17:50:11', '2026-06-07 17:50:11'),
-('FK2004', 'committee02', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Nurul Hazwani binti Ismail', 'hazwani@student.umpsa.edu.my', '0123456781', 'committee', NULL, 'active', '2026-06-07 17:50:11', '2026-06-07 17:50:11'),
-('FK1002', 'student01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Nurul Aina binti Zainal', 'aina@student.umpsa.edu.my', '0123456782', 'student', NULL, 'active', '2026-06-07 17:50:11', '2026-06-07 17:50:11'),
-('FK1035', 'student02', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Muhammad Haziq bin Zulkifli', 'haziq@student.umpsa.edu.my', '0123456783', 'student', NULL, 'active', '2026-06-07 17:50:11', '2026-06-07 17:50:11'),
-('FK1036', 'student03', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Siti Rahmah binti Othman', 'rahmah@student.umpsa.edu.my', '0123456784', 'student', NULL, 'active', '2026-06-07 17:50:11', '2026-06-07 17:50:11'),
-('FK1039', 'student04', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Khairul Anwar bin Hassan', 'khairul@student.umpsa.edu.my', '0123456785', 'student', NULL, 'active', '2026-06-07 17:50:11', '2026-06-07 17:50:11'),
-('FK1045', 'student05', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Zulaikha Nadia binti Mahmud', 'zulaikha@student.umpsa.edu.my', '0123456786', 'student', NULL, 'active', '2026-06-07 17:50:11', '2026-06-07 17:50:11'),
-('CB24068', 'CB24068', '$2y$10$l8.VYU5AvYgE.YyMnIDzC.KcOdVpwSxunUObHNE1l613DwNF5Fz9m', 'MOHAMAD AKMAL', 'cb24068@adab.umpsa.edu.my', '010-000000', 'admin', NULL, 'active', '2026-06-10 22:58:48', '2026-06-10 22:58:48'),
-('CB24084', 'CB24084', '$2y$10$xNZQ87UkIKhFFzsidwPXsu1WTAg76AZr2nWBzEFBzGl8FVHPw.EBW', 'HASLIZA BINTI MAD SAID', 'cb24084@adab.umpsa.edu.my', '010-3393392', 'admin', NULL, 'active', '2026-06-10 23:01:36', '2026-06-10 23:01:36'),
+('FK2004', 'committee02', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Nurul Hazwani binti Ismail', 'hazwani@student.umpsa.edu.my', NULL, 'committee', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
+('FK2008', 'committee01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Ahmad Firdaus bin Razak', 'firdaus@student.umpsa.edu.my', NULL, 'committee', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
+('SF001', 'admin01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Dr. Siti Aminah binti Ahmad', 'admin@umpsa.edu.my', NULL, 'admin', NULL, 'active', '2026-06-07 16:20:49', '2026-06-07 16:20:49'),
 ('TK24029', 'TK24029', '$2y$10$Fn3CW9qflx.WGN/MZpnAi.19sfwXb2VqnfHHXrwBHLqeyuNVqF99C', 'ANJE GEBU', 'anje@adab.umpsa.edu.my', '010-00000023', 'committee', NULL, 'active', '2026-06-11 01:44:58', '2026-06-11 01:44:58');
 
 -- --------------------------------------------------------
@@ -460,12 +441,32 @@ INSERT INTO `waiting_list` (`waiting_id`, `queued_at`, `status`, `updated_at`, `
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `attendance`
 --
 ALTER TABLE `attendance`
   ADD PRIMARY KEY (`attendance_id`),
   ADD KEY `student_id` (`student_id`),
   ADD KEY `event_id` (`event_id`);
+
+--
+-- Indexes for table `club`
+--
+ALTER TABLE `club`
+  ADD PRIMARY KEY (`club_id`);
+
+--
+-- Indexes for table `club_committee`
+--
+ALTER TABLE `club_committee`
+  ADD PRIMARY KEY (`committee_id`),
+  ADD UNIQUE KEY `club_id` (`club_id`,`user_id`);
 
 --
 -- Indexes for table `event`
@@ -479,19 +480,29 @@ ALTER TABLE `event`
 -- Indexes for table `event_qr`
 --
 ALTER TABLE `event_qr`
-  ADD PRIMARY KEY (`qr_id`);
+  ADD PRIMARY KEY (`qr_id`),
+  ADD UNIQUE KEY `event_id` (`event_id`);
+
+--
+-- Indexes for table `membership`
+--
+ALTER TABLE `membership`
+  ADD PRIMARY KEY (`membership_id`),
+  ADD UNIQUE KEY `student_id` (`student_id`,`club_id`);
 
 --
 -- Indexes for table `registrations`
 --
 ALTER TABLE `registrations`
-  ADD PRIMARY KEY (`registration_id`);
+  ADD PRIMARY KEY (`registration_id`),
+  ADD UNIQUE KEY `event_id` (`event_id`,`student_id`);
 
 --
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
-  ADD PRIMARY KEY (`student_id`);
+  ADD PRIMARY KEY (`student_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `student_points`
@@ -500,6 +511,19 @@ ALTER TABLE `student_points`
   ADD PRIMARY KEY (`point_id`),
   ADD KEY `student_id` (`student_id`),
   ADD KEY `event_id` (`event_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `waiting_list`
+--
+ALTER TABLE `waiting_list`
+  ADD PRIMARY KEY (`waiting_id`),
+  ADD UNIQUE KEY `event_id` (`event_id`,`student_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables

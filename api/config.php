@@ -169,3 +169,4 @@ function update_student_total_points(string $studentId): void
     $update->execute([$total, $studentId]);
 }
 ?>
+ 
