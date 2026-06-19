@@ -7,28 +7,123 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/event.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+  <style>
+    /* Styling to make sure the QR image looks beautiful and centered */
+    .qr-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      min-height: 270px;
+    }
+    .qr-image-frame {
+      width: 250px;
+      height: 250px;
+      border: 2px solid #e2e8f0;
+      padding: 12px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      display: none;
+    }
+  </style>
 </head>
 <body class="app-shell" data-page="attendanceQR" data-role="committee" data-nav="attendance">
   <aside id="sidebar" class="sidebar"></aside>
+  
   <main class="main">
     <div id="topbar" class="topbar"></div>
-    <header class="page-header"><h1>Attendance QR + Geolocation</h1><p>Students scan this code during the event. Committee can use geolocation as check-in proof.</p></header>
-    <section class="form-group" style="margin-bottom:18px;max-width:760px;">
+    
+    <header class="page-header">
+      <h1>Attendance QR + Geolocation</h1>
+      <p>Students scan this code during the event. Committee can use geolocation as check-in proof.</p>
+    </header>
+    
+    <section class="form-group" style="margin-bottom:18px; max-width:760px;">
       <label for="qrEventSelect">Select Event</label>
-      <select id="qrEventSelect"></select>
+      <select id="qrEventSelect">
+        <option value="">-- Loading Events --</option>
+      </select>
     </section>
-    <section class="card qr-panel" style="max-width:760px;text-align:center">
-      <h2 id="qrTitle">Event</h2>
-      <p id="qrMeta" class="muted-text">Event details</p>
-      <div id="fakeQR" class="qr-box"></div>
-      <p><strong id="qrCodeText">FKHUB-EVENT</strong></p>
-      <div class="geo-card"><strong>Geolocation Stamp:</strong><br><span id="geoOutput">Click button to capture location.</span></div>
-      <div class="actions" style="justify-content:center;margin-top:18px"><button class="btn btn-light" id="qrGeoBtn" type="button">Capture Geolocation</button><a class="btn btn-primary" id="recordLink" href="attendanceRecord.html">Record Attendance</a></div>
+    
+    <section class="card qr-panel" style="max-width:760px; text-align:center">
+      <h2 id="qrTitle">Event Title</h2>
+      <p id="qrMeta" class="muted-text">Loading event details...</p>
+      
+      <!-- FIXED: The fake QR box div layer has been replaced with a real image element container -->
+      <div class="qr-container">
+        <img id="qrCodeImage" class="qr-image-frame" src="" alt="Dynamic Attendance QR Code" />
+      </div>
+      
+      <p><strong id="qrCodeText" style="letter-spacing: 1px; color: #4a5568;">TOKEN: FETCHING...</strong></p>
+      
+      <div class="geo-card">
+        <strong>Geolocation Stamp:</strong><br>
+        <span id="geoOutput">Click button to capture location.</span>
+      </div>
+      
+      <div class="actions" style="justify-content:center; margin-top:18px">
+        <button class="btn btn-light" id="qrGeoBtn" type="button">Capture Geolocation</button>
+        <a class="btn btn-primary" id="recordLink" href="attendanceRecord.html">Record Attendance</a>
+      </div>
     </section>
   </main>
+
+  <!-- Core System App Dependencies Scripts -->
   <script src="../api/data.js.php"></script>
   <script src="../assets/js/app.js"></script>
   <script src="../assets/js/sidebar.js"></script>
   <script src="../assets/js/attendance.js"></script>
+
+  <!-- Live Dynamic QR Code Fetch Script Engine -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdownSelect = document.getElementById('qrEventSelect');
+      const qrImage = document.getElementById('qrCodeImage');
+      const qrText = document.getElementById('qrCodeText');
+
+      // Function to dynamically update the QR code element view directly from your backend PHP script
+      function fetchLiveQRCode(eventId) {
+        if (!eventId) {
+          qrImage.style.display = 'none';
+          qrText.textContent = "NO EVENT SELECTED";
+          return;
+        }
+
+        qrText.textContent = "GENERATING CODE...";
+        
+        // Fetch the active real-time QR link configuration setup from your api script
+        fetch(`../api/generate_qr.php?event_id=${eventId}`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.success && data.qr_url) {
+              // Swap out the screen image tag src directly with the real QRServer matrix link
+              qrImage.src = data.qr_url;
+              qrImage.style.display = 'inline-block';
+              qrText.textContent = "TOKEN: " + data.token.toUpperCase();
+            } else {
+              qrText.textContent = "GENERATION ERROR";
+              console.error("Failed to fetch live QR data: ", data.message);
+            }
+          })
+          .catch(err => {
+            qrText.textContent = "CONNECTION FAILURE";
+            console.error("Communication failure with generate_qr.php: ", err);
+          });
+      }
+
+      // Attach a listener to monitor whenever the user switches between alternative option drop boxes
+      dropdownSelect.addEventListener('change', (e) => {
+        fetchLiveQRCode(e.target.value);
+      });
+
+      // Automatically pre-load the QR code script layout once on initial browser launch load-in
+      setTimeout(() => {
+        if (dropdownSelect && dropdownSelect.value) {
+          fetchLiveQRCode(dropdownSelect.value);
+        }
+      }, 800);
+    });
+  </script>
 </body>
 </html>
